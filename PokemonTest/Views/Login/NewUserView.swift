@@ -14,39 +14,44 @@ struct NewUserView: View {
     @State private var alertMessage = ""
     
     var body: some View {
-        NavigationView {
-            Form {
-                // MARK: Datos personales
-                Section(header: Text("Datos Personales")) {
-                    TextField("Nombre", text: $nombre)
-                    TextField("Email", text: $email)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                    SecureField("Contraseña", text: $password)
-                }
-                
-                Section {
-                    Button(action: saveUser) {
-                        HStack {
-                            Spacer()
-                            Text("Registrar Entrenador")
-                                .bold()
-                            Spacer()
-                        }
+        ZStack {
+            Color.yellow
+            NavigationView {
+                Form {
+                    // MARK: Datos personales
+                    Section(header: Text("Datos Personales")) {
+                        TextField("Nombre", text: $nombre)
+                        TextField("Email", text: $email)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                        SecureField("Contraseña", text: $password)
                     }
-                    .listRowBackground(Color.yellow)
-                    .foregroundColor(.black)
+                    
+                    Section {
+                        Button(action: saveUser) {
+                            HStack {
+                                Spacer()
+                                Text("Registrar Entrenador")
+                                    .bold()
+                                Spacer()
+                            }
+                        }
+                        .listRowBackground(Color.red)
+                        .foregroundColor(.black)
+                    }
+                }
+                .navigationTitle("Nuevo Usuario")
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Pokedex Update"),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("¡Entendido!"))
+                    )
                 }
             }
-            .navigationTitle("Nuevo Usuario")
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text("Pokedex Update"),
-                    message: Text(alertMessage),
-                    dismissButton: .default(Text("¡Entendido!"))
-                )
-            }
+       
         }
+        
     }
     
     // MARK: - Lógica de Guardado

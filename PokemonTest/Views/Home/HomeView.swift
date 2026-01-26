@@ -9,27 +9,32 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        TabView {
-            PokemonView()
-                .tabItem {
- 
-                    Label("Pokemon", systemImage: "circle.grid.2x2.fill")
-                }
+        ZStack {
+            Color.yellow
+            TabView {
+                PokemonView()
+                    .tabItem {
+     
+                        Label("Pokemon", systemImage: "circle.grid.2x2.fill")
+                    }
 
-            FavoritesView()
-                .tabItem {
-    
-                    Label("Favorites", systemImage: "star.fill")
-                }
+                FavoritesView()
+                    .tabItem {
+        
+                        Label("Favorites", systemImage: "star.fill")
+                    }
 
-            InfoView()
-                .tabItem {
+                InfoView()
+                    .tabItem {
 
-                    Label("Info", systemImage: "info.circle.fill")
-                }
+                        Label("Info", systemImage: "info.circle.fill")
+                    }
+            }
+            .accentColor(.black)
+            }
+       
         }
-        .accentColor(.yellow) 
-        }
+       
 }
 
 #Preview {
