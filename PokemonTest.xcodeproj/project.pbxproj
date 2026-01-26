@@ -16,6 +16,13 @@
 		D947FCA82F27B51B00F527DC /* PokemonTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCA72F27B51B00F527DC /* PokemonTestTests.swift */; };
 		D947FCB22F27B51B00F527DC /* PokemonTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCB12F27B51B00F527DC /* PokemonTestUITests.swift */; };
 		D947FCB42F27B51B00F527DC /* PokemonTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCB32F27B51B00F527DC /* PokemonTestUITestsLaunchTests.swift */; };
+		D947FCC62F27B5B400F527DC /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCC52F27B5B400F527DC /* Pokemon.swift */; };
+		D947FCC82F27B5C800F527DC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCC72F27B5C800F527DC /* HomeView.swift */; };
+		D947FCCA2F27B5EC00F527DC /* PokemonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCC92F27B5EC00F527DC /* PokemonDetailsView.swift */; };
+		D947FCCC2F27BA2700F527DC /* LaucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCCB2F27BA2600F527DC /* LaucherView.swift */; };
+		D947FCCE2F27BCE300F527DC /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCCD2F27BCE300F527DC /* InfoView.swift */; };
+		D947FCD02F27BCFB00F527DC /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCCF2F27BCFB00F527DC /* FavoritesView.swift */; };
+		D947FCD22F27BD0700F527DC /* PokemonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCD12F27BD0700F527DC /* PokemonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,13 @@
 		D947FCAD2F27B51B00F527DC /* PokemonTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D947FCB12F27B51B00F527DC /* PokemonTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTestUITests.swift; sourceTree = "<group>"; };
 		D947FCB32F27B51B00F527DC /* PokemonTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D947FCC52F27B5B400F527DC /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		D947FCC72F27B5C800F527DC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D947FCC92F27B5EC00F527DC /* PokemonDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsView.swift; sourceTree = "<group>"; };
+		D947FCCB2F27BA2600F527DC /* LaucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaucherView.swift; sourceTree = "<group>"; };
+		D947FCCD2F27BCE300F527DC /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		D947FCCF2F27BCFB00F527DC /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		D947FCD12F27BD0700F527DC /* PokemonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +112,11 @@
 		D947FC902F27B51800F527DC /* PokemonTest */ = {
 			isa = PBXGroup;
 			children = (
+				D947FCC42F27B59500F527DC /* EndPoints */,
+				D947FCC32F27B58D00F527DC /* Launcher */,
+				D947FCC22F27B58600F527DC /* Views */,
+				D947FCC12F27B58000F527DC /* ViewModels */,
+				D947FCC02F27B57800F527DC /* Models */,
 				D947FC912F27B51800F527DC /* PokemonTestApp.swift */,
 				D947FC932F27B51800F527DC /* ContentView.swift */,
 				D947FC952F27B51B00F527DC /* Assets.xcassets */,
@@ -131,6 +150,48 @@
 				D947FCB32F27B51B00F527DC /* PokemonTestUITestsLaunchTests.swift */,
 			);
 			path = PokemonTestUITests;
+			sourceTree = "<group>";
+		};
+		D947FCC02F27B57800F527DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCC52F27B5B400F527DC /* Pokemon.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D947FCC12F27B58000F527DC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D947FCC22F27B58600F527DC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCC72F27B5C800F527DC /* HomeView.swift */,
+				D947FCC92F27B5EC00F527DC /* PokemonDetailsView.swift */,
+				D947FCCD2F27BCE300F527DC /* InfoView.swift */,
+				D947FCCF2F27BCFB00F527DC /* FavoritesView.swift */,
+				D947FCD12F27BD0700F527DC /* PokemonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D947FCC32F27B58D00F527DC /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCCB2F27BA2600F527DC /* LaucherView.swift */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
+		D947FCC42F27B59500F527DC /* EndPoints */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EndPoints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,9 +324,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D947FCD02F27BCFB00F527DC /* FavoritesView.swift in Sources */,
+				D947FCC62F27B5B400F527DC /* Pokemon.swift in Sources */,
 				D947FC9B2F27B51B00F527DC /* Persistence.swift in Sources */,
+				D947FCCA2F27B5EC00F527DC /* PokemonDetailsView.swift in Sources */,
+				D947FCCC2F27BA2700F527DC /* LaucherView.swift in Sources */,
 				D947FC9E2F27B51B00F527DC /* PokemonTest.xcdatamodeld in Sources */,
+				D947FCC82F27B5C800F527DC /* HomeView.swift in Sources */,
 				D947FC942F27B51800F527DC /* ContentView.swift in Sources */,
+				D947FCD22F27BD0700F527DC /* PokemonView.swift in Sources */,
+				D947FCCE2F27BCE300F527DC /* InfoView.swift in Sources */,
 				D947FC922F27B51800F527DC /* PokemonTestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
