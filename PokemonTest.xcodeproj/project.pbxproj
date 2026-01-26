@@ -23,6 +23,8 @@
 		D947FCCE2F27BCE300F527DC /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCCD2F27BCE300F527DC /* InfoView.swift */; };
 		D947FCD02F27BCFB00F527DC /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCCF2F27BCFB00F527DC /* FavoritesView.swift */; };
 		D947FCD22F27BD0700F527DC /* PokemonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCD12F27BD0700F527DC /* PokemonView.swift */; };
+		D947FCD42F27C20800F527DC /* endpointsDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = D947FCD32F27C20800F527DC /* endpointsDev.plist */; };
+		D947FCD62F27C27200F527DC /* APIEndpointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCD52F27C27200F527DC /* APIEndpointModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		D947FCCD2F27BCE300F527DC /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		D947FCCF2F27BCFB00F527DC /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		D947FCD12F27BD0700F527DC /* PokemonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonView.swift; sourceTree = "<group>"; };
+		D947FCD32F27C20800F527DC /* endpointsDev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = endpointsDev.plist; sourceTree = "<group>"; };
+		D947FCD52F27C27200F527DC /* APIEndpointModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				D947FCC52F27B5B400F527DC /* Pokemon.swift */,
+				D947FCD52F27C27200F527DC /* APIEndpointModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 		D947FCC42F27B59500F527DC /* EndPoints */ = {
 			isa = PBXGroup;
 			children = (
+				D947FCD32F27C20800F527DC /* endpointsDev.plist */,
 			);
 			path = EndPoints;
 			sourceTree = "<group>";
@@ -298,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D947FCD42F27C20800F527DC /* endpointsDev.plist in Resources */,
 				D947FC992F27B51B00F527DC /* Preview Assets.xcassets in Resources */,
 				D947FC962F27B51B00F527DC /* Assets.xcassets in Resources */,
 			);
@@ -325,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D947FCD02F27BCFB00F527DC /* FavoritesView.swift in Sources */,
+				D947FCD62F27C27200F527DC /* APIEndpointModel.swift in Sources */,
 				D947FCC62F27B5B400F527DC /* Pokemon.swift in Sources */,
 				D947FC9B2F27B51B00F527DC /* Persistence.swift in Sources */,
 				D947FCCA2F27B5EC00F527DC /* PokemonDetailsView.swift in Sources */,

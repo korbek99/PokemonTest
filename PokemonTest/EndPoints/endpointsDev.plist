@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>crearPokemon</key>
+	<dict>
+		<key>url</key>
+		<string>https://pokeapi.co/api/v2/pokemon/</string>
+		<key>x-api-key</key>
+		<string>yL285dvequN1GLt1yUCdpiHy8L8lJOlO</string>
+	</dict>
+	<key>crearDetails</key>
+	<dict>
+		<key>url</key>
+		<string>https://pokeapi.co/api/v2/pokemon/1/</string>
+		<key>x-api-key</key>
+		<string>yL285dvequN1GLt1yUCdpiHy8L8lJOlO</string>
+	</dict>
+</dict>
+</plist>
