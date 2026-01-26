@@ -28,6 +28,7 @@
 		D947FCD82F27C30B00F527DC /* PokemonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCD72F27C30B00F527DC /* PokemonViewModel.swift */; };
 		D947FCDB2F27C33800F527DC /* PokemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCDA2F27C33800F527DC /* PokemonService.swift */; };
 		D947FCE22F27C67800F527DC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCE12F27C67800F527DC /* LoginView.swift */; };
+		D947FCE42F27C73400F527DC /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCE32F27C73400F527DC /* NewUserView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		D947FCD72F27C30B00F527DC /* PokemonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewModel.swift; sourceTree = "<group>"; };
 		D947FCDA2F27C33800F527DC /* PokemonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonService.swift; sourceTree = "<group>"; };
 		D947FCE12F27C67800F527DC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D947FCE32F27C73400F527DC /* NewUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				D947FCE12F27C67800F527DC /* LoginView.swift */,
+				D947FCE32F27C73400F527DC /* NewUserView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D947FCE42F27C73400F527DC /* NewUserView.swift in Sources */,
 				D947FCD02F27BCFB00F527DC /* FavoritesView.swift in Sources */,
 				D947FCD62F27C27200F527DC /* APIEndpointModel.swift in Sources */,
 				D947FCC62F27B5B400F527DC /* Pokemon.swift in Sources */,
