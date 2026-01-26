@@ -181,11 +181,11 @@
 		D947FCC22F27B58600F527DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D947FCC72F27B5C800F527DC /* HomeView.swift */,
-				D947FCC92F27B5EC00F527DC /* PokemonDetailsView.swift */,
-				D947FCCD2F27BCE300F527DC /* InfoView.swift */,
-				D947FCCF2F27BCFB00F527DC /* FavoritesView.swift */,
-				D947FCD12F27BD0700F527DC /* PokemonView.swift */,
+				D947FCE02F27C63C00F527DC /* Home */,
+				D947FCDF2F27C62E00F527DC /* Favorites */,
+				D947FCDE2F27C62500F527DC /* Info */,
+				D947FCDD2F27C61E00F527DC /* Login */,
+				D947FCDC2F27C60B00F527DC /* Pokemons */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,6 +212,46 @@
 				D947FCDA2F27C33800F527DC /* PokemonService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D947FCDC2F27C60B00F527DC /* Pokemons */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCC92F27B5EC00F527DC /* PokemonDetailsView.swift */,
+				D947FCD12F27BD0700F527DC /* PokemonView.swift */,
+			);
+			path = Pokemons;
+			sourceTree = "<group>";
+		};
+		D947FCDD2F27C61E00F527DC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D947FCDE2F27C62500F527DC /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCCD2F27BCE300F527DC /* InfoView.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		D947FCDF2F27C62E00F527DC /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCCF2F27BCFB00F527DC /* FavoritesView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		D947FCE02F27C63C00F527DC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCC72F27B5C800F527DC /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
