@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    // Variables locales para que la vista funcione sola
+ 
     @State private var email = ""
     @State private var password = ""
     @State private var showPassword: Bool = false
@@ -17,7 +17,7 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            // Fondo amarillo que cubre toda la pantalla
+  
             Color.yellow
                 .ignoresSafeArea()
             
@@ -30,8 +30,7 @@ struct LoginView: View {
                         .padding(.top, 40)
 
                     Spacer()
-                    
-                    // Campo correo
+
                     VStack(alignment: .leading) {
                         Text("Correo electrónico")
                             .font(.caption)
@@ -44,8 +43,7 @@ struct LoginView: View {
                             .background(Color(.secondarySystemBackground))
                             .cornerRadius(10)
                     }
-                    
-                    // Campo password
+
                     VStack(alignment: .leading) {
                         Text("Contraseña")
                             .font(.caption)
@@ -68,9 +66,8 @@ struct LoginView: View {
                         .cornerRadius(10)
                     }
 
-                    // Botón login
                     Button(action: {
-                        // Acción temporal de ejemplo
+                       
                         print("Login pulsado")
                     }) {
                         if isLoading {
@@ -88,7 +85,7 @@ struct LoginView: View {
                     .cornerRadius(10)
                     .padding(.top, 10)
                     
-                    // Error
+            
                     if !errorMessage.isEmpty {
                         Text(errorMessage)
                             .foregroundColor(.red)
@@ -98,13 +95,13 @@ struct LoginView: View {
                     Spacer()
                 }
                 .padding(20)
-                .background(Color.yellow) // Mantiene el estilo
+                .background(Color.yellow)
             }
         }
-        // Simulación de paso a Home
+        // Simulación
         .fullScreenCover(isPresented: $loginSuccess) {
             Text("Bienvenido a HomeView")
-            // Aquí pondrías tu HomeView() real
+           
         }
     }
 }
