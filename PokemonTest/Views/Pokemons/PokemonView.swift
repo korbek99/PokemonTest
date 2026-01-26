@@ -50,8 +50,23 @@ struct PokemonView: View {
                     }
                 }
             }
-            .navigationTitle("Pokédex")
-            .searchable(text: $searchText, prompt: "Buscar...")
+ 
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack(spacing: 5) {
+                        Image(systemName: "circle.circle.fill")
+                            .foregroundColor(.white)
+                            .imageScale(.large)
+                        
+                        Text("Pokédex")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                    }
+                }
+            }
+            .searchable(text: $searchText, prompt: "Search...")
+            
             .task {
                 await viewModel.fetchPokemons()
             }
@@ -64,6 +79,16 @@ struct PokemonGridItem: View {
     
     var body: some View {
         VStack(spacing: 8) {
+            
+            HStack {
+                Spacer()
+                Text("#001")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundColor(.gray.opacity(0.8))
+                    .padding(.trailing, 8)
+                    .padding(.top, 4)
+            }
+
             ZStack {
                 Circle()
                     .fill(Color.gray.opacity(0.1))
@@ -79,6 +104,9 @@ struct PokemonGridItem: View {
                 .foregroundColor(.primary)
                 .lineLimit(1)
         }
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+        .cornerRadius(12)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
         .background(Color.white)
