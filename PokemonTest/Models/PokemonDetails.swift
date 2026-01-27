@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Foundation
 
 struct PokemonDetails: Codable {
     let id: Int
