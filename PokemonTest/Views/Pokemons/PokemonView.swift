@@ -8,7 +8,7 @@ import SwiftUI
 struct PokemonView: View {
     @StateObject private var viewModel = PokemonViewModel()
     @State private var searchText = ""
-    
+ 
     private let columns = [
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12),
@@ -50,23 +50,24 @@ struct PokemonView: View {
                     }
                 }
             }
- 
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack(spacing: 5) {
-                        Image(systemName: "circle.circle.fill")
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "dot.circle.and.hand.point.up.left.fill")
                             .foregroundColor(.white)
-                            .imageScale(.large)
-                        
                         Text("Pokédex")
                             .font(.headline)
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "Search...")
-            
+
+            .searchable(text: $searchText, prompt: "Buscar Pokémon...")
+            .toolbarBackground(Color.red, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .task {
                 await viewModel.fetchPokemons()
             }
@@ -74,52 +75,67 @@ struct PokemonView: View {
     }
 }
 
+// MARK: - Grid Item
 struct PokemonGridItem: View {
     let pokemon: PokemonResult
     
+  
+    private var rawID: String {
+        pokemon.url.split(separator: "/").last?.description ?? "0"
+    }
+
+    private var formattedID: String {
+        if let idInt = Int(rawID) {
+            return String(format: "%03d", idInt)
+        }
+        return rawID
+    }
+    
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 5) {
             
             HStack {
                 Spacer()
-                Text("#" + formattedID)
+                Text("#\(formattedID)")
                     .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(.gray.opacity(0.8))
+                    .foregroundColor(.gray.opacity(0.6))
                     .padding(.trailing, 8)
-                    .padding(.top, 4)
+                    .padding(.top, 6)
             }
-
+            
             ZStack {
                 Circle()
                     .fill(Color.gray.opacity(0.1))
-                    .frame(height: 70)
+                    .frame(height: 65)
                 
-                Image(systemName: "questionmark.circle.fill")
-                    .foregroundColor(.gray.opacity(0.5))
-                    .font(.system(size: 30))
+                AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(rawID).png")) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60, height: 60)
+                    case .failure:
+                        Image(systemName: "questionmark.circle.fill")
+                            .foregroundColor(.gray.opacity(0.3))
+                    case .empty:
+                        ProgressView()
+                            .controlSize(.small)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
             }
-            
+
             Text(pokemon.name.capitalized)
-                .font(.caption.bold())
+                .font(.system(size: 12, weight: .bold))
                 .foregroundColor(.primary)
                 .lineLimit(1)
+                .padding(.bottom, 8)
         }
-        .frame(maxWidth: .infinity)
-        .background(Color.white)
-        .cornerRadius(12)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 12)
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
-    }
-    
-    var formattedID: String {
-        let idString = pokemon.url.split(separator: "/").last?.description ?? "0"
-        if let idInt = Int(idString) {
-            return String(format: "%03d", idInt)
-        }
-        return idString
     }
 }
 
