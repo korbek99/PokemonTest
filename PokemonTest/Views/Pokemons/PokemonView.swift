@@ -82,7 +82,7 @@ struct PokemonGridItem: View {
             
             HStack {
                 Spacer()
-                Text("#001")
+                Text("#" + formattedID)
                     .font(.system(size: 10, weight: .bold))
                     .foregroundColor(.gray.opacity(0.8))
                     .padding(.trailing, 8)
@@ -112,6 +112,14 @@ struct PokemonGridItem: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+    }
+    
+    var formattedID: String {
+        let idString = pokemon.url.split(separator: "/").last?.description ?? "0"
+        if let idInt = Int(idString) {
+            return String(format: "%03d", idInt)
+        }
+        return idString
     }
 }
 
