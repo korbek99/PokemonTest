@@ -9,6 +9,7 @@ import Foundation
 
 public struct APIEndpointModel {
     let url: URL
+    let BaseUrl: String
     let APIKey: String
     let APIToken: String?
 }

@@ -34,6 +34,7 @@
 		D947FCEA2F2931A100F527DC /* PokemonDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCE92F2931A100F527DC /* PokemonDataService.swift */; };
 		D947FCEC2F2A605000F527DC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCEB2F2A605000F527DC /* NetworkError.swift */; };
 		D947FCEE2F2A617B00F527DC /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCED2F2A617B00F527DC /* BaseService.swift */; };
+		D947FCF02F2A66EF00F527DC /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCEF2F2A66EF00F527DC /* AppConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		D947FCE92F2931A100F527DC /* PokemonDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDataService.swift; sourceTree = "<group>"; };
 		D947FCEB2F2A605000F527DC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D947FCED2F2A617B00F527DC /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		D947FCEF2F2A66EF00F527DC /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 				D947FCE92F2931A100F527DC /* PokemonDataService.swift */,
 				D947FCEB2F2A605000F527DC /* NetworkError.swift */,
 				D947FCED2F2A617B00F527DC /* BaseService.swift */,
+				D947FCEF2F2A66EF00F527DC /* AppConfig.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				D947FCCC2F27BA2700F527DC /* LaucherView.swift in Sources */,
 				D947FCEE2F2A617B00F527DC /* BaseService.swift in Sources */,
 				D947FCEA2F2931A100F527DC /* PokemonDataService.swift in Sources */,
+				D947FCF02F2A66EF00F527DC /* AppConfig.swift in Sources */,
 				D947FCD82F27C30B00F527DC /* PokemonViewModel.swift in Sources */,
 				D947FC9E2F27B51B00F527DC /* PokemonTest.xcdatamodeld in Sources */,
 				D947FCC82F27B5C800F527DC /* HomeView.swift in Sources */,

@@ -27,6 +27,7 @@ class BaseService {
         
         return APIEndpointModel(
             url: url,
+            BaseUrl: endpoint["baseurl"] ?? "",
             APIKey: endpoint["x-api-key"] ?? "",
             APIToken: endpoint["x-api-token"]
         )

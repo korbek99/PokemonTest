@@ -107,7 +107,7 @@ struct PokemonGridItem: View {
                         .fill(Color.gray.opacity(0.1))
                         .frame(height: 65)
                     
-                    AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(rawID).png")) { phase in
+                    AsyncImage(url: AppConfig.pokemonImageUrl(for: rawID)) { phase in
                         switch phase {
                         case .success(let image):
                             image

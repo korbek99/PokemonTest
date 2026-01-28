@@ -8,7 +8,7 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     let pokemon: PokemonResult
-    // 1. Instanciamos el ViewModel
+    
     @StateObject private var viewModel = PokemonDetailViewModel()
     
     private var rawID: String {
@@ -22,8 +22,7 @@ struct PokemonDetailsView: View {
         }
         return rawID
     }
-    
-    // Buscamos el detalle que coincida con este pokemon
+ 
     private var currentDetails: PokemonDetails? {
         viewModel.pokemonList.first
     }
@@ -37,12 +36,12 @@ struct PokemonDetailsView: View {
                 Spacer(minLength: 120)
                 
                 VStack(spacing: 20) {
-                    // Cargador mientras obtenemos los datos
+                    
                     if viewModel.isLoading {
                         ProgressView("Cargando detalles...")
                             .padding(.top, 100)
                     } else {
-                        // 3. Labels Izquierda y Derecha con DATOS REALES
+                        
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("\(Double(currentDetails?.height ?? 0) / 10, specifier: "%.1f") m")
@@ -61,7 +60,7 @@ struct PokemonDetailsView: View {
                         .padding(.horizontal, 40)
                         .padding(.top, 70)
                         
-                        // 4. Sección About
+                      
                         VStack(alignment: .leading, spacing: 10) {
                             Text("About")
                                 .font(.headline)
@@ -74,7 +73,7 @@ struct PokemonDetailsView: View {
                         }
                         .padding(.horizontal, 30)
                         
-                        // 5. Grid de Estadísticas con DATOS REALES
+                       
                         VStack(alignment: .leading, spacing: 15) {
                             Text("Información Base")
                                 .font(.headline)
@@ -96,9 +95,9 @@ struct PokemonDetailsView: View {
             }
             .ignoresSafeArea(edges: .bottom)
             
-            // 2. Imagen del Pokémon Flotante
+           
             VStack {
-                AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(rawID).png")) { phase in
+                AsyncImage(url: AppConfig.pokemonImageUrl(for: rawID)) { phase in
                     switch phase {
                     case .success(let image):
                         image
@@ -121,7 +120,7 @@ struct PokemonDetailsView: View {
         .navigationTitle(pokemon.name.capitalized)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
-        // 6. Ejecutar la carga al entrar a la vista
+       
         .task {
             await viewModel.fetchPokemons()
         }
