@@ -75,11 +75,9 @@ struct PokemonView: View {
     }
 }
 
-// MARK: - Grid Item
 struct PokemonGridItem: View {
     let pokemon: PokemonResult
     
-  
     private var rawID: String {
         pokemon.url.split(separator: "/").last?.description ?? "0"
     }
@@ -92,50 +90,56 @@ struct PokemonGridItem: View {
     }
     
     var body: some View {
-        VStack(spacing: 5) {
-            
-            HStack {
-                Spacer()
-                Text("#\(formattedID)")
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(.gray.opacity(0.6))
-                    .padding(.trailing, 8)
-                    .padding(.top, 6)
-            }
-            
-            ZStack {
-                Circle()
-                    .fill(Color.gray.opacity(0.1))
-                    .frame(height: 65)
-                
-                AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(rawID).png")) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, height: 60)
-                    case .failure:
-                        Image(systemName: "questionmark.circle.fill")
-                            .foregroundColor(.gray.opacity(0.3))
-                    case .empty:
-                        ProgressView()
-                            .controlSize(.small)
-                    @unknown default:
-                        EmptyView()
-                    }
+        // Al tocar la celda, navegamos al Loader pasando el nombre
+        NavigationLink(destination: PokemonDetailsView(pokemon: pokemon)) {
+            VStack(spacing: 5) {
+                HStack {
+                    Spacer()
+                    Text("#\(formattedID)")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.gray.opacity(0.6))
+                        .padding(.trailing, 8)
+                        .padding(.top, 6)
                 }
-            }
+                
+                ZStack {
+                    Circle()
+                        .fill(Color.gray.opacity(0.1))
+                        .frame(height: 65)
+                    
+                    AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(rawID).png")) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                        case .failure(let error):
+                            // Si falla, imprimimos el error en consola para saber qué pasa
+                            let _ = print("Error cargando ID \(rawID): \(error.localizedDescription)")
+                            Image(systemName: "bolt.horizontal.circle.fill") // Icono de error
+                                .foregroundColor(.gray.opacity(0.3))
+                        case .empty:
+                            ProgressView()
+                                .controlSize(.small)
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                    .id(rawID) // Forzamos el refresco si el ID cambia
+                }
 
-            Text(pokemon.name.capitalized)
-                .font(.system(size: 12, weight: .bold))
-                .foregroundColor(.primary)
-                .lineLimit(1)
-                .padding(.bottom, 8)
+                Text(pokemon.name.capitalized)
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.primary)
+                    .lineLimit(1)
+                    .padding(.bottom, 8)
+            }
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
         }
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
