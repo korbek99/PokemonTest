@@ -26,7 +26,7 @@ struct PokemonView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.red.opacity(0.9)
+                Color.white.opacity(0.9)
                     .ignoresSafeArea()
                 
                 if viewModel.isLoading {
@@ -65,7 +65,7 @@ struct PokemonView: View {
             }
 
             .searchable(text: $searchText, prompt: "Buscar Pokémon...")
-            .toolbarBackground(Color.red, for: .navigationBar)
+            .toolbarBackground(Color.white, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task {
@@ -90,7 +90,7 @@ struct PokemonGridItem: View {
     }
     
     var body: some View {
-        // Al tocar la celda, navegamos al Loader pasando el nombre
+      
         NavigationLink(destination: PokemonDetailsView(pokemon: pokemon)) {
             VStack(spacing: 5) {
                 HStack {
@@ -115,9 +115,9 @@ struct PokemonGridItem: View {
                                 .scaledToFit()
                                 .frame(width: 60, height: 60)
                         case .failure(let error):
-                            // Si falla, imprimimos el error en consola para saber qué pasa
+                       
                             let _ = print("Error cargando ID \(rawID): \(error.localizedDescription)")
-                            Image(systemName: "bolt.horizontal.circle.fill") // Icono de error
+                            Image(systemName: "bolt.horizontal.circle.fill")
                                 .foregroundColor(.gray.opacity(0.3))
                         case .empty:
                             ProgressView()
@@ -126,7 +126,7 @@ struct PokemonGridItem: View {
                             EmptyView()
                         }
                     }
-                    .id(rawID) // Forzamos el refresco si el ID cambia
+                    .id(rawID)
                 }
 
                 Text(pokemon.name.capitalized)
