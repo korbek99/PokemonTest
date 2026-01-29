@@ -5,9 +5,11 @@
 //  Created by Jose Preatorian on 26-01-26.
 //
 import SwiftUI
+
 struct PokemonView: View {
     @StateObject private var viewModel = PokemonViewModel()
     @State private var searchText = ""
+    @Binding var showMenu: Bool 
  
     private let columns = [
         GridItem(.flexible(), spacing: 12),
@@ -31,7 +33,7 @@ struct PokemonView: View {
                 
                 if viewModel.isLoading {
                     ProgressView()
-                        .tint(.white)
+                        .tint(.red) // Cambiado a rojo para que se vea sobre blanco
                         .scaleEffect(1.5)
                 } else {
                     ScrollView {
@@ -45,13 +47,31 @@ struct PokemonView: View {
                     .overlay {
                         if filteredPokemon.isEmpty && !searchText.isEmpty {
                             ContentUnavailableView.search(text: searchText)
-                                .foregroundColor(.white)
+                                // Quitamos el color blanco para que se vea en el fondo claro
                         }
                     }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                            showMenu.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "circle.grid.2x2.fill")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.red)
+                            .padding(8)
+                            .background(
+                                Circle()
+                                    .fill(Color.white)
+                                    .shadow(color: .black.opacity(0.1), radius: 3)
+                            )
+                    }
+                }
+
                 ToolbarItem(placement: .principal) {
                     HStack(spacing: 8) {
                         Image(systemName: "dot.circle.and.hand.point.up.left.fill")
@@ -63,7 +83,6 @@ struct PokemonView: View {
                     }
                 }
             }
-
             .searchable(text: $searchText, prompt: "Buscar Pokémon...")
             .toolbarBackground(Color.red, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
@@ -75,6 +94,7 @@ struct PokemonView: View {
     }
 }
 
+// MARK: - Grid Item
 struct PokemonGridItem: View {
     let pokemon: PokemonResult
     
@@ -90,7 +110,6 @@ struct PokemonGridItem: View {
     }
     
     var body: some View {
-      
         NavigationLink(destination: PokemonDetailsView(pokemon: pokemon)) {
             VStack(spacing: 5) {
                 HStack {
@@ -114,14 +133,11 @@ struct PokemonGridItem: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 60, height: 60)
-                        case .failure(let error):
-                       
-                            let _ = print("Error cargando ID \(rawID): \(error.localizedDescription)")
+                        case .failure(_):
                             Image(systemName: "bolt.horizontal.circle.fill")
                                 .foregroundColor(.gray.opacity(0.3))
                         case .empty:
-                            ProgressView()
-                                .controlSize(.small)
+                            ProgressView().controlSize(.small)
                         @unknown default:
                             EmptyView()
                         }
@@ -144,5 +160,5 @@ struct PokemonGridItem: View {
 }
 
 #Preview {
-    PokemonView()
+    PokemonView(showMenu: .constant(false))
 }

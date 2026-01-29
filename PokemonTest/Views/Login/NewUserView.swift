@@ -5,8 +5,14 @@
 //  Created by Jose Preatorian on 26-01-26.
 //
 import SwiftUI
+import SwiftData
 
 struct NewUserView: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    
+    var onFinished: () -> Void
+    
     @State private var nombre = ""
     @State private var email = ""
     @State private var password = ""
@@ -14,47 +20,44 @@ struct NewUserView: View {
     @State private var alertMessage = ""
     
     var body: some View {
-        ZStack {
-            Color.yellow
-            NavigationView {
-                Form {
-                    // MARK: Datos personales
-                    Section(header: Text("Datos Personales")) {
-                        TextField("Nombre", text: $nombre)
-                        TextField("Email", text: $email)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                        SecureField("Contraseña", text: $password)
-                    }
-                    
-                    Section {
-                        Button(action: saveUser) {
-                            HStack {
-                                Spacer()
-                                Text("Registrar Entrenador")
-                                    .bold()
-                                Spacer()
-                            }
-                        }
-                        .listRowBackground(Color.red)
-                        .foregroundColor(.black)
-                    }
+        NavigationStack {
+            Form {
+                Section(header: Text("Datos Personales")) {
+                    TextField("Nombre", text: $nombre)
+                    TextField("Email", text: $email)
+                        .keyboardType(.emailAddress)
+                        .textInputAutocapitalization(.never) 
+                    SecureField("Contraseña", text: $password)
                 }
-                .navigationTitle("Nuevo Usuario")
-                .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("Pokedex Update"),
-                        message: Text(alertMessage),
-                        dismissButton: .default(Text("¡Entendido!"))
-                    )
+                
+                Section {
+                    Button(action: saveUser) {
+                        HStack {
+                            Spacer()
+                            Text("Registrar Entrenador").bold()
+                            Spacer()
+                        }
+                    }
+                    .listRowBackground(Color.red)
+                    .foregroundColor(.white)
                 }
             }
-       
+            .navigationTitle("Nuevo Usuario")
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Pokedex Update"),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("¡A la aventura!")) {
+                        // 2. Si el mensaje es de éxito, disparamos el cambio de flujo
+                        if alertMessage.contains("éxito") {
+                            onFinished()
+                        }
+                    }
+                )
+            }
         }
-        
     }
     
-    // MARK: - Lógica de Guardado
     func saveUser() {
         if nombre.isEmpty || email.isEmpty || password.isEmpty {
             alertMessage = "¡Faltan datos! Un entrenador debe completar su perfil."
@@ -62,17 +65,22 @@ struct NewUserView: View {
             return
         }
 
-        alertMessage = "¡Usuario \(nombre) guardado con éxito!"
-        showAlert = true
+        let nuevoEntrenador = Entrenador(nombre: nombre, email: email, password: password)
+        modelContext.insert(nuevoEntrenador)
         
-        print("""
-              --- Nuevo Usuario ---
-              Nombre: \(nombre)
-              Email: \(email)
-              """)
+        do {
+            try modelContext.save()
+            alertMessage = "¡Usuario \(nombre) guardado con éxito!"
+            showAlert = true
+        } catch {
+            alertMessage = "Error al guardar el entrenador."
+            showAlert = true
+        }
     }
 }
 
 #Preview {
-    NewUserView()
+    NewUserView(onFinished: {})
+        .modelContainer(for: Entrenador.self, inMemory: true)
 }
+

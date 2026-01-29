@@ -4,63 +4,47 @@
 //
 //  Created by Jose Preatorian on 28-01-26.
 //
-
 import SwiftUI
+import SwiftData
 
 struct SideMenuView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var entrenadores: [Entrenador]
     
-    var username: String
     var logoutAction: () -> Void
     var closeMenu: () -> Void
     
-    @State private var goToNewUser = false
+    private var currentUsername: String {
+        entrenadores.first?.nombre ?? "Entrenador"
+    }
 
-    //let session = UserSession.shared
-    
     var body: some View {
         ZStack(alignment: .leading) {
-            
             Color.black.opacity(0.3)
                 .ignoresSafeArea()
                 .onTapGesture { closeMenu() }
             
             VStack(alignment: .leading, spacing: 10) {
-      
-                NavigationLink(
-                    "",
-                    destination: NewUserView(),
-                    isActive: $goToNewUser
-                )
-                .hidden()
-                
-        
-                HStack {
+                HStack(spacing: 15) {
                     Image(systemName: "person.circle.fill")
                         .font(.system(size: 50))
-                        .foregroundColor(.blue)
+                        .foregroundColor(.red)
                     
-                    Text(username)
-                        .font(.title3)
-                        .bold()
+                    VStack(alignment: .leading) {
+                        Text(currentUsername)
+                            .font(.title3)
+                            .bold()
+                        
+                        Text("Entrenador Nivel 1")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
                 }
-                .padding(.top, 120)
+                .padding(.top, 100)
                 
                 Divider().padding(.vertical, 10)
                 
-
-//                if !session.isAdminOrConsultor {
-//                    Button(action: openNewUser) {
-//                        HStack {
-//                            Image(systemName: "person.badge.plus")
-//                            Text("Agregar Mandante")
-//                        }
-//                        .font(.title3)
-//                        .foregroundColor(.black)
-//                    }
-//                }
-                
-                // Logout
-                Button(action: logoutAction) {
+                Button(action: performLogout) {
                     HStack {
                         Image(systemName: "arrowshape.turn.up.left.fill")
                         Text("Cerrar sesión")
@@ -78,21 +62,23 @@ struct SideMenuView: View {
         }
     }
     
-    // 👉 FUNCIÓN INTERNA
-    private func openNewUser() {
-        goToNewUser = true
-        closeMenu()
+ 
+    private func performLogout() {
+        
+        for entrenador in entrenadores {
+            modelContext.delete(entrenador)
+        }
+
+        try? modelContext.save()
+ 
+        logoutAction()
     }
 }
 
-
 #Preview {
     SideMenuView(
-        username: "Jose Bustos",
-        logoutAction: { print("Logout tap") },
-        closeMenu: { print("Close menu tap") }
+        logoutAction: { print("Logout") },
+        closeMenu: { print("Close") }
     )
+    .modelContainer(for: Entrenador.self, inMemory: true)
 }
-
-
-

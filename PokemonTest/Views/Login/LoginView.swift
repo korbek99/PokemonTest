@@ -5,19 +5,22 @@
 //  Created by Jose Preatorian on 26-01-26.
 //
 import SwiftUI
+import SwiftData
 
 struct LoginView: View {
+    
+    @Query private var entrenadores: [Entrenador]
+
+    var onLoginSuccess: () -> Void
  
     @State private var email = ""
     @State private var password = ""
     @State private var showPassword: Bool = false
     @State private var isLoading: Bool = false
-    @State private var loginSuccess: Bool = false
     @State private var errorMessage: String = ""
     
     var body: some View {
         ZStack {
-  
             Color.yellow
                 .ignoresSafeArea()
             
@@ -66,10 +69,7 @@ struct LoginView: View {
                         .cornerRadius(10)
                     }
 
-                    Button(action: {
-                       
-                        print("Login pulsado")
-                    }) {
+                    Button(action: performLogin) {
                         if isLoading {
                             ProgressView()
                                 .tint(.white)
@@ -85,11 +85,11 @@ struct LoginView: View {
                     .cornerRadius(10)
                     .padding(.top, 10)
                     
-            
                     if !errorMessage.isEmpty {
                         Text(errorMessage)
                             .foregroundColor(.red)
                             .font(.callout)
+                            .multilineTextAlignment(.center)
                     }
 
                     Spacer()
@@ -98,14 +98,35 @@ struct LoginView: View {
                 .background(Color.yellow)
             }
         }
-        // Simulación
-        .fullScreenCover(isPresented: $loginSuccess) {
-            Text("Bienvenido a HomeView")
-           
+    }
+    
+    // 4. Función de validación
+    func performLogin() {
+        errorMessage = ""
+        isLoading = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+
+            if let entrenadorEncontrado = entrenadores.first(where: { $0.email.lowercased() == email.lowercased() }) {
+
+                if entrenadorEncontrado.password == password {
+                    isLoading = false
+                    onLoginSuccess()
+                } else {
+                    isLoading = false
+                    errorMessage = "Contraseña incorrecta."
+                }
+            } else {
+                isLoading = false
+                errorMessage = "No se encontró ningún entrenador con ese correo."
+            }
         }
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView(onLoginSuccess: {
+        print("Login exitoso")
+    })
+    .modelContainer(for: Entrenador.self, inMemory: true)
 }

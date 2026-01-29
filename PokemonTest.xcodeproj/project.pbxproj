@@ -37,6 +37,7 @@
 		D947FCF02F2A66EF00F527DC /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCEF2F2A66EF00F527DC /* AppConfig.swift */; };
 		D947FCF32F2A6E5D00F527DC /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF22F2A6E5D00F527DC /* SideMenuView.swift */; };
 		D947FCF62F2BC81000F527DC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF52F2BC81000F527DC /* Color.swift */; };
+		D947FCF82F2BF28800F527DC /* Entrenador.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF72F2BF28800F527DC /* Entrenador.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		D947FCEF2F2A66EF00F527DC /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		D947FCF22F2A6E5D00F527DC /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		D947FCF52F2BC81000F527DC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		D947FCF72F2BF28800F527DC /* Entrenador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entrenador.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 				D947FCC52F27B5B400F527DC /* Pokemon.swift */,
 				D947FCD52F27C27200F527DC /* APIEndpointModel.swift */,
 				D947FCE52F27F26E00F527DC /* PokemonDetails.swift */,
+				D947FCF72F2BF28800F527DC /* Entrenador.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				D947FCCA2F27B5EC00F527DC /* PokemonDetailsView.swift in Sources */,
 				D947FCEC2F2A605000F527DC /* NetworkError.swift in Sources */,
 				D947FCCC2F27BA2700F527DC /* LaucherView.swift in Sources */,
+				D947FCF82F2BF28800F527DC /* Entrenador.swift in Sources */,
 				D947FCEE2F2A617B00F527DC /* BaseService.swift in Sources */,
 				D947FCEA2F2931A100F527DC /* PokemonDataService.swift in Sources */,
 				D947FCF02F2A66EF00F527DC /* AppConfig.swift in Sources */,
