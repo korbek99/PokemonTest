@@ -7,17 +7,23 @@
 import Foundation
 import UIKit
 
-// MARK: - Protocolo
+// MARK: - Protocolo Actualizado
 protocol PokemonServiceDataProtocol {
-    func getArticles(completion: @escaping ([PokemonDetails]?) -> ())
+    func getArticles(pokemonId: String, completion: @escaping ([PokemonDetails]?) -> ())
 }
 
 // MARK: - Servicio
-class PokemonDataService: BaseService,  PokemonServiceDataProtocol {
+class PokemonDataService: BaseService, PokemonServiceDataProtocol {
     var urlbase: String = ""
     
-    func getArticles() async throws -> [PokemonDetails] {
+    func getArticles(pokemonId: String) async throws -> [PokemonDetails] {
         guard let endpointData = getEndpoint(fromName: "crearDetails") else {
+            throw NetworkError.invalidEndpoint
+        }
+
+        let fullURLString = endpointData.url.absoluteString + pokemonId
+        
+        guard let dynamicURL = URL(string: fullURLString) else {
             throw NetworkError.invalidEndpoint
         }
         
@@ -25,7 +31,7 @@ class PokemonDataService: BaseService,  PokemonServiceDataProtocol {
         let response: URLResponse
 
         do {
-            (data, response) = try await URLSession.shared.data(from: endpointData.url)
+            (data, response) = try await URLSession.shared.data(from: dynamicURL)
         } catch {
             throw NetworkError.networkError(error)
         }
@@ -35,22 +41,18 @@ class PokemonDataService: BaseService,  PokemonServiceDataProtocol {
         }
         
         do {
-
             let decodedResponse = try JSONDecoder().decode(PokemonDetails.self, from: data)
-
             return [decodedResponse]
-            
         } catch {
-            print("❌ Error de decodificación detallado: \(error)")
+            print("❌ Error de decodificación: \(error)")
             throw NetworkError.decodingError
         }
     }
 
-
-    func getArticles(completion: @escaping ([PokemonDetails]?) -> ()) {
+    func getArticles(pokemonId: String, completion: @escaping ([PokemonDetails]?) -> ()) {
         Task {
             do {
-                let result = try await getArticles()
+                let result = try await getArticles(pokemonId: pokemonId)
                 completion(result)
             } catch {
                 print("❌ Service Error: \(error.localizedDescription)")
@@ -59,4 +61,3 @@ class PokemonDataService: BaseService,  PokemonServiceDataProtocol {
         }
     }
 }
-

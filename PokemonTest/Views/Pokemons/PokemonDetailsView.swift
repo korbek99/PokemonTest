@@ -34,18 +34,26 @@ struct PokemonDetailsView: View {
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 30) {
 
-                                HStack {
-                                    VStack(spacing: 4) {
-                                        Text("\(Double(currentDetails?.height ?? 0) / 10, specifier: "%.1f") m")
-                                            .font(.title3.bold())
-                                        Text("Altura").font(.caption).foregroundColor(.gray)
-                                    }
+                                HStack(alignment: .center) {
                                     Spacer()
-                                    VStack(spacing: 4) {
-                                        Text("\(currentDetails?.baseExperience ?? 0) XP")
-                                            .font(.title3.bold())
-                                        Text("Experiencia").font(.caption).foregroundColor(.gray)
+                                    
+                                    HStack(spacing: 3) {
+                                        if let types = currentDetails?.types {
+                                            ForEach(types, id: \.type.name) { typeSlot in
+                                                Text(typeSlot.type.name.capitalized)
+                                                    .font(.system(size: 10, weight: .bold))
+                                                    .foregroundColor(.white)
+                                                    .padding(.horizontal, 12)
+                                                    .padding(.vertical, 4)
+                                                    .background(
+                                                        Capsule()
+                                                            .fill(Color.blue.opacity(0.5))
+                                                    )
+                                            }
+                                        }
                                     }
+                                    
+                                    Spacer()
                                 }
                                 .padding(.top, 60)
                                 .padding(.horizontal, 40)
@@ -83,8 +91,7 @@ struct PokemonDetailsView: View {
                                         .padding(.top, 10)
                                 }
                                 .padding(.horizontal, 30)
-                                
-                                // BASE STATS
+
                                 VStack(alignment: .center, spacing: 15) {
                                     Text("Base Stats")
                                         .font(.headline)
@@ -128,7 +135,7 @@ struct PokemonDetailsView: View {
         .navigationTitle(pokemon.name.capitalized)
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            await viewModel.fetchPokemons()
+            await viewModel.fetchPokemons(pokemonId: rawID)
         }
     }
 }

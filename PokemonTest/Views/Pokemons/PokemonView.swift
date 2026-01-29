@@ -65,7 +65,7 @@ struct PokemonView: View {
             }
 
             .searchable(text: $searchText, prompt: "Buscar Pokémon...")
-            .toolbarBackground(Color.white, for: .navigationBar)
+            .toolbarBackground(Color.red, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task {

@@ -14,13 +14,14 @@ class PokemonDetailViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     private let service = PokemonDataService()
-    
-    func fetchPokemons() async {
+
+    func fetchPokemons(pokemonId: String) async {
         isLoading = true
         errorMessage = nil
         
         do {
-            let data = try await service.getArticles()
+
+            let data = try await service.getArticles(pokemonId: pokemonId)
             self.pokemonList = data
         } catch {
             self.errorMessage = "Error al obtener los datos: \(error.localizedDescription)"
