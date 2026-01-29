@@ -15,9 +15,8 @@ protocol PokemonServiceDataProtocol {
 // MARK: - Servicio
 class PokemonDataService: BaseService,  PokemonServiceDataProtocol {
     var urlbase: String = ""
- 
+    
     func getArticles() async throws -> [PokemonDetails] {
-        
         guard let endpointData = getEndpoint(fromName: "crearDetails") else {
             throw NetworkError.invalidEndpoint
         }
@@ -30,18 +29,19 @@ class PokemonDataService: BaseService,  PokemonServiceDataProtocol {
         } catch {
             throw NetworkError.networkError(error)
         }
-        
 
         if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
             throw NetworkError.badResponse(statusCode: httpResponse.statusCode)
         }
         
-
         do {
-            let decodedResponse = try JSONDecoder().decode([PokemonDetails].self, from: data)
-            return decodedResponse
+
+            let decodedResponse = try JSONDecoder().decode(PokemonDetails.self, from: data)
+
+            return [decodedResponse]
+            
         } catch {
-            print("❌ Error de decodificación: \(error)")
+            print("❌ Error de decodificación detallado: \(error)")
             throw NetworkError.decodingError
         }
     }

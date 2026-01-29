@@ -47,7 +47,7 @@ struct SideMenuView: View {
                 
                 Divider().padding(.vertical, 10)
                 
-                // 👉 SOLO ADMIN puede ver Agregar Mandante
+
 //                if !session.isAdminOrConsultor {
 //                    Button(action: openNewUser) {
 //                        HStack {

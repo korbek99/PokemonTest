@@ -4,13 +4,14 @@
 //
 //  Created by Jose Preatorian on 26-01-26.
 //
-
 import Foundation
 
 struct PokemonDetails: Codable {
     let id: Int
+    let name: String
     let baseExperience: Int
     let height: Int
+    let weight: Int
     let isDefault: Bool
     let locationAreaEncounters: String
     let abilities: [AbilitySlot]
@@ -18,14 +19,32 @@ struct PokemonDetails: Codable {
     let forms: [NamedResource]
     let gameIndices: [GameIndex]
     let moves: [MoveElement]
+    let stats: [StatSlot]
+    let types: [TypeSlot]
 
     enum CodingKeys: String, CodingKey {
-        case id, abilities, cries, forms, height, moves
+        case id, name, abilities, cries, forms, height, moves, weight, stats, types
         case baseExperience = "base_experience"
         case isDefault = "is_default"
         case locationAreaEncounters = "location_area_encounters"
         case gameIndices = "game_indices"
     }
+}
+
+struct StatSlot: Codable {
+    let baseStat: Int
+    let effort: Int
+    let stat: NamedResource
+
+    enum CodingKeys: String, CodingKey {
+        case effort, stat
+        case baseStat = "base_stat"
+    }
+}
+
+struct TypeSlot: Codable {
+    let slot: Int
+    let type: NamedResource
 }
 
 struct AbilitySlot: Codable {
@@ -72,11 +91,9 @@ struct MoveElement: Codable {
 struct VersionGroupDetail: Codable {
     let levelLearnedAt: Int
     let moveLearnMethod: NamedResource
-    let order: Int? 
     let versionGroup: NamedResource
 
     enum CodingKeys: String, CodingKey {
-        case order
         case levelLearnedAt = "level_learned_at"
         case moveLearnMethod = "move_learn_method"
         case versionGroup = "version_group"
