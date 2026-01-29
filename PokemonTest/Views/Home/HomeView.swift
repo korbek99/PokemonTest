@@ -60,7 +60,7 @@ struct HomeView: View {
     func logout() {
         withAnimation {
             showMenu = false
-            // Aca borrar session
+            // Aca borrar session no esta completa
         }
     }
 }
