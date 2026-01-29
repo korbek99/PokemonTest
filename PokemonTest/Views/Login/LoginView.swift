@@ -99,8 +99,7 @@ struct LoginView: View {
             }
         }
     }
-    
-    // 4. Función de validación
+ 
     func performLogin() {
         errorMessage = ""
         isLoading = true

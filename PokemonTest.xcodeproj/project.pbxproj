@@ -38,6 +38,7 @@
 		D947FCF32F2A6E5D00F527DC /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF22F2A6E5D00F527DC /* SideMenuView.swift */; };
 		D947FCF62F2BC81000F527DC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF52F2BC81000F527DC /* Color.swift */; };
 		D947FCF82F2BF28800F527DC /* Entrenador.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF72F2BF28800F527DC /* Entrenador.swift */; };
+		D947FCFA2F2C07DD00F527DC /* FavoritePoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF92F2C07DD00F527DC /* FavoritePoke.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		D947FCF22F2A6E5D00F527DC /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		D947FCF52F2BC81000F527DC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D947FCF72F2BF28800F527DC /* Entrenador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entrenador.swift; sourceTree = "<group>"; };
+		D947FCF92F2C07DD00F527DC /* FavoritePoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePoke.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				D947FCD52F27C27200F527DC /* APIEndpointModel.swift */,
 				D947FCE52F27F26E00F527DC /* PokemonDetails.swift */,
 				D947FCF72F2BF28800F527DC /* Entrenador.swift */,
+				D947FCF92F2C07DD00F527DC /* FavoritePoke.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				D947FCD62F27C27200F527DC /* APIEndpointModel.swift in Sources */,
 				D947FCC62F27B5B400F527DC /* Pokemon.swift in Sources */,
 				D947FCF62F2BC81000F527DC /* Color.swift in Sources */,
+				D947FCFA2F2C07DD00F527DC /* FavoritePoke.swift in Sources */,
 				D947FCE22F27C67800F527DC /* LoginView.swift in Sources */,
 				D947FCE82F29315400F527DC /* PokemonDetailViewModel.swift in Sources */,
 				D947FC9B2F27B51B00F527DC /* Persistence.swift in Sources */,

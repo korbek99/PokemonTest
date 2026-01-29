@@ -4,35 +4,24 @@
 //
 //  Created by Jose Preatorian on 26-01-26.
 //
-
 import SwiftUI
-import SwiftUI
-
-struct FavoritePokemon: Identifiable {
-    let id: Int
-    let name: String
-    var formattedID: String { String(format: "%03d", id) }
-}
+import SwiftData
 
 struct FavoritesView: View {
- 
+    
+    @Query(sort: \FavoritePoke.name) private var favoritePokemons: [FavoritePoke]
+    @Environment(\.modelContext) private var modelContext
+    
     @State private var searchText = ""
     @Binding var showMenu: Bool
-    private let favoritePokemons = [
-        FavoritePokemon(id: 1, name: "bulbasaur"),
-        FavoritePokemon(id: 4, name: "charmander"),
-        FavoritePokemon(id: 7, name: "squirtle"),
-        FavoritePokemon(id: 25, name: "pikachu"),
-        FavoritePokemon(id: 133, name: "eevee")
-    ]
     
     private let columns = [
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12)
     ]
-    
-    var filteredPokemon: [FavoritePokemon] {
+  
+    var filteredPokemon: [FavoritePoke] {
         if searchText.isEmpty {
             return favoritePokemons
         } else {
@@ -46,19 +35,26 @@ struct FavoritesView: View {
                 Color.yellow.opacity(0.15)
                     .ignoresSafeArea()
                 
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 15) {
-                        ForEach(filteredPokemon) { pokemon in
-                            FavoriteGridItem(pokemon: pokemon)
+                if favoritePokemons.isEmpty {
+                    ContentUnavailableView("No hay favoritos",
+                                           systemImage: "heart.slash",
+                                           description: Text("Tus Pokémon marcados aparecerán aquí."))
+                } else {
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 15) {
+                            ForEach(filteredPokemon) { pokemon in
+                                
+                                FavoriteGridItem(pokemon: pokemon)
+                                    .contextMenu {
+                                        Button(role: .destructive) {
+                                            modelContext.delete(pokemon)
+                                        } label: {
+                                            Label("Eliminar de favoritos", systemImage: "trash")
+                                        }
+                                    }
+                            }
                         }
-                    }
-                    .padding()
-                }
-                .overlay {
-                    if filteredPokemon.isEmpty {
-                        ContentUnavailableView("No hay favoritos",
-                                             systemImage: "heart.slash",
-                                             description: Text("Tus Pokémon marcados aparecerán aquí."))
+                        .padding()
                     }
                 }
             }
@@ -101,15 +97,19 @@ struct FavoritesView: View {
     }
 }
 
-// MARK: - UI Grid Item (Solo UX)
+// MARK: - UI Grid Item
 struct FavoriteGridItem: View {
-    let pokemon: FavoritePokemon
+    let pokemon: FavoritePoke
+
+    private var formattedID: String {
+        String(format: "%03d", pokemon.id)
+    }
     
     var body: some View {
         VStack(spacing: 5) {
             HStack {
                 Spacer()
-                Text("#\(pokemon.formattedID)")
+                Text("#\(formattedID)")
                     .font(.system(size: 10, weight: .bold))
                     .foregroundColor(.gray.opacity(0.6))
                     .padding(.trailing, 8)
@@ -120,11 +120,23 @@ struct FavoriteGridItem: View {
                 Circle()
                     .fill(Color.gray.opacity(0.1))
                     .frame(height: 65)
-                Image(systemName: "questionmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.red.opacity(0.2))
+
+                AsyncImage(url: AppConfig.pokemonImageUrl(for: String(pokemon.id))) { phase in
+                    if let image = phase.image {
+                        image.resizable()
+                            .scaledToFit()
+                            .frame(width: 55, height: 55)
+                    } else if phase.error != nil {
+                        Image(systemName: "exclamationmark.circle.fill")
+                            .foregroundColor(.red.opacity(0.2))
+                    } else {
+                        Image(systemName: "bolt.horizontal.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.gray.opacity(0.2))
+                    }
+                }
             }
 
             Text(pokemon.name.capitalized)
@@ -142,5 +154,5 @@ struct FavoriteGridItem: View {
 // MARK: - Preview
 #Preview {
     FavoritesView(showMenu: .constant(false))
+        .modelContainer(for: FavoritePoke.self, inMemory: true)
 }
-

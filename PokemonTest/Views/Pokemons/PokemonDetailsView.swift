@@ -6,10 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PokemonDetailsView: View {
     let pokemon: PokemonResult
     @StateObject private var viewModel = PokemonDetailViewModel()
+    @Environment(\.modelContext) private var modelContext
+    
+    @Query private var favoriteList: [FavoritePoke]
+    
+    private var isFavorite: Bool {
+        favoriteList.contains(where: { $0.id == Int(rawID) })
+    }
     
     private var rawID: String {
         pokemon.url.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
@@ -135,18 +143,43 @@ struct PokemonDetailsView: View {
         }
         .navigationTitle(pokemon.name.capitalized)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    toggleFavorite()
+                } label: {
+                    Image(systemName: isFavorite ? "star.fill" : "star")
+                        .foregroundColor(isFavorite ? .yellow : .white)
+                        .font(.system(size: 18, weight: .bold))
+                }
+            }
+        }
         .task {
             await viewModel.fetchPokemons(pokemonId: rawID)
         }
     }
+
     private func getStatValue(name: String) -> Int {
         currentDetails?.stats.first(where: { $0.stat.name == name })?.baseStat ?? 0
     }
+
     private var mainColor: Color {
         if let typeName = currentDetails?.types.first?.type.name {
             return Color.pokemonTypeColor(type: typeName)
         }
         return .red
+    }
+    
+    func toggleFavorite() {
+        let pId = Int(rawID) ?? 0
+        
+        if let existingFav = favoriteList.first(where: { $0.id == pId }) {
+            modelContext.delete(existingFav)
+        } else {
+            let nuevoFavorito = FavoritePoke(id: pId, name: pokemon.name)
+            modelContext.insert(nuevoFavorito)
+        }
+        try? modelContext.save()
     }
 }
 

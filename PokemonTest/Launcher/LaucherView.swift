@@ -15,8 +15,7 @@ struct LaucherView: View {
     @State private var iconScale: CGFloat = 0.8
     @State private var iconRotation: Double = 0
     @State private var opacity: Double = 0
-    
-    // Control de flujo de la aplicación
+
     @State private var currentFlow: AppStep = .splash
 
     enum AppStep {
@@ -33,13 +32,11 @@ struct LaucherView: View {
                 splashContent
                 
             case .register:
-                // Al terminar registro, lo mandamos al Login
                 NewUserView(onFinished: {
                     withAnimation { currentFlow = .login }
                 })
                 
             case .login:
-                // Si el login es exitoso, entramos a la Home
                 LoginView(onLoginSuccess: {
                     withAnimation { currentFlow = .home }
                 })
@@ -50,7 +47,6 @@ struct LaucherView: View {
         }
     }
 
-    // Contenido del Splash con animaciones
     var splashContent: some View {
         ZStack {
             Circle()
@@ -77,7 +73,7 @@ struct LaucherView: View {
             }
         }
         .onAppear {
-            // Iniciar animaciones visuales
+           
             withAnimation { waveScale = 2.0 }
             withAnimation(.easeInOut(duration: 0.1).repeatCount(6, autoreverses: true)) { iconRotation = 10 }
             withAnimation(.easeIn(duration: 1.2)) {
@@ -85,14 +81,11 @@ struct LaucherView: View {
                 iconScale = 1.1
             }
 
-            // Lógica de decisión de ruta
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation {
                     if entrenadores.isEmpty {
-                        // No hay usuario -> Registrarse
                         currentFlow = .register
                     } else {
-                        // Ya hay usuario -> Debe loguearse
                         currentFlow = .login
                     }
                 }

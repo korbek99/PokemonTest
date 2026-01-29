@@ -9,7 +9,7 @@ import SwiftUI
 struct PokemonView: View {
     @StateObject private var viewModel = PokemonViewModel()
     @State private var searchText = ""
-    @Binding var showMenu: Bool 
+    @Binding var showMenu: Bool
  
     private let columns = [
         GridItem(.flexible(), spacing: 12),
@@ -47,7 +47,6 @@ struct PokemonView: View {
                     .overlay {
                         if filteredPokemon.isEmpty && !searchText.isEmpty {
                             ContentUnavailableView.search(text: searchText)
-                                // Quitamos el color blanco para que se vea en el fondo claro
                         }
                     }
                 }

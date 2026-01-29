@@ -16,6 +16,6 @@ struct PokemonTestApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
-        .modelContainer(for: Entrenador.self)
+        .modelContainer(for: [Entrenador.self, FavoritePoke.self])
     }
 }
