@@ -46,7 +46,7 @@ struct PokemonDetailsView: View {
                                                     .padding(.vertical, 4)
                                                     .background(
                                                         Capsule()
-                                                            .fill(Color.blue.opacity(0.5))
+                                                            .fill( mainColor.opacity(0.5))
                                                     )
                                             }
                                         }
@@ -60,7 +60,7 @@ struct PokemonDetailsView: View {
                                 VStack(spacing: 15) {
                                     Text("About")
                                         .font(.headline)
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(mainColor)
                                     
                                     HStack(spacing: 0) {
 
@@ -94,15 +94,15 @@ struct PokemonDetailsView: View {
                                 VStack(alignment: .center, spacing: 15) {
                                     Text("Base Stats")
                                         .font(.headline)
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(mainColor)
                                     
                                     VStack(spacing: 12) {
-                                        StatRow(label: "HP", value: getStatValue(name: "hp"), max: 255, color: .blue)
-                                        StatRow(label: "ATK", value: getStatValue(name: "attack"), max: 255, color: .blue)
-                                        StatRow(label: "DEF", value: getStatValue(name: "defense"), max: 255, color: .blue)
-                                        StatRow(label: "SPD", value: getStatValue(name: "speed"), max: 255, color: .blue)
-                                        StatRow(label: "SATK", value: getStatValue(name: "special-attack"), max: 255, color: .blue)
-                                        StatRow(label: "SDEF", value: getStatValue(name: "special-defense"), max: 255, color: .blue)
+                                        StatRow(label: "HP", value: getStatValue(name: "hp"), max: 255, color: mainColor)
+                                        StatRow(label: "ATK", value: getStatValue(name: "attack"), max: 255, color:  mainColor)
+                                        StatRow(label: "DEF", value: getStatValue(name: "defense"), max: 255, color:  mainColor)
+                                        StatRow(label: "SPD", value: getStatValue(name: "speed"), max: 255, color:  mainColor)
+                                        StatRow(label: "SATK", value: getStatValue(name: "special-attack"), max: 255, color:  mainColor)
+                                        StatRow(label: "SDEF", value: getStatValue(name: "special-defense"), max: 255, color:  mainColor)
                                     }
                                     .padding(.horizontal, 30)
                                 }
