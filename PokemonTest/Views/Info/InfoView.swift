@@ -15,6 +15,7 @@ struct InfoView: View {
             Text("InfoView")
        
         }
+        .padding(.top, 45)
     }
 }
 

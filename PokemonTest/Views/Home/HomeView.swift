@@ -5,20 +5,21 @@
 //  Created by Jose Preatorian on 26-01-26.
 //
 
+
 import SwiftUI
+
 struct HomeView: View {
     @State private var showMenu = false
     
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-            
+
             TabView {
-                
                 PokemonView()
                     .tabItem {
                         Label("Pokemon", systemImage: "circle.grid.2x2.fill")
-                    }.padding(.top, 15)
+                    }
                 
                 FavoritesView()
                     .tabItem {
@@ -34,7 +35,6 @@ struct HomeView: View {
             .disabled(showMenu)
             .blur(radius: showMenu ? 5 : 0)
             
-            // Botón de menú flotante (Sustituye a la Toolbar)
             if !showMenu {
                 VStack {
                     HStack {
@@ -50,14 +50,13 @@ struct HomeView: View {
                                 .shadow(radius: 2)
                         }
                         .padding(.leading, 10)
-                        .padding(.top, 0) // Ajusta según el notch
+                        .padding(.top, 0)
                         Spacer()
                     }
                     Spacer()
                 }
             }
 
-            // Fondo oscuro y SideMenu
             if showMenu {
                 Color.black.opacity(0.3)
                     .ignoresSafeArea()

@@ -15,6 +15,8 @@ struct FavoritesView: View {
             Text("FavoritesView")
        
         }
+        .padding(.top, 45)
+        
    
     }
 }

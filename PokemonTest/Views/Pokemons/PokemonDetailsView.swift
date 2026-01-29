@@ -4,11 +4,12 @@
 //
 //  Created by Jose Preatorian on 26-01-26.
 //
+
 import SwiftUI
+
 
 struct PokemonDetailsView: View {
     let pokemon: PokemonResult
-    
     @StateObject private var viewModel = PokemonDetailViewModel()
     
     private var rawID: String {
@@ -16,13 +17,6 @@ struct PokemonDetailsView: View {
                    .components(separatedBy: "/").last ?? "1"
     }
 
-    private var formattedID: String {
-        if let idInt = Int(rawID) {
-            return String(format: "%03d", idInt)
-        }
-        return rawID
-    }
- 
     private var currentDetails: PokemonDetails? {
         viewModel.pokemonList.first
     }
@@ -32,70 +26,82 @@ struct PokemonDetailsView: View {
             Color.red.opacity(0.9)
                 .ignoresSafeArea()
             
-            VStack {
-                Spacer(minLength: 120)
+            VStack(spacing: 0) {
+                Spacer(minLength: 220)
                 
-                VStack(spacing: 20) {
-                    
+                VStack {
                     if viewModel.isLoading {
                         ProgressView("Cargando detalles...")
-                            .padding(.top, 100)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
-                        
-                        HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("\(Double(currentDetails?.height ?? 0) / 10, specifier: "%.1f") m")
-                                    .font(.title3.bold())
-                                Text("Altura")
-                                    .font(.caption).foregroundColor(.gray)
-                            }
-                            Spacer()
-                            VStack(alignment: .trailing, spacing: 4) {
-                                Text("\(currentDetails?.baseExperience ?? 0) XP")
-                                    .font(.title3.bold())
-                                Text("Experiencia")
-                                    .font(.caption).foregroundColor(.gray)
-                            }
-                        }
-                        .padding(.horizontal, 40)
-                        .padding(.top, 70)
-                        
-                      
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("About")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                            
-                            Text("Este Pokémon tiene una habilidad principal llamada **\(currentDetails?.abilities.first?.ability.name.capitalized ?? "Desconocida")**. ID oficial de registro #\(rawID).")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .lineSpacing(4)
-                        }
-                        .padding(.horizontal, 30)
-                        
-                       
-                        VStack(alignment: .leading, spacing: 15) {
-                            Text("Información Base")
-                                .font(.headline)
-                                .padding(.horizontal, 30)
+                        ScrollView(.vertical, showsIndicators: false) {
+                            VStack(spacing: 30) {
 
-                            HStack(spacing: 0) {
-                                StatsColumn(title: "Habilidad", value: currentDetails?.abilities.first?.ability.name.capitalized ?? "N/A")
-                                StatsColumn(title: "Registro", value: "#\(rawID)")
-                                StatsColumn(title: "Oficial", value: (currentDetails?.isDefault ?? false) ? "Sí" : "No")
+                                HStack {
+                                    VStack(spacing: 4) {
+                                        Text("\(Double(currentDetails?.height ?? 0) / 10, specifier: "%.1f") m")
+                                            .font(.title3.bold())
+                                        Text("Altura").font(.caption).foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                    VStack(spacing: 4) {
+                                        Text("\(currentDetails?.baseExperience ?? 0) XP")
+                                            .font(.title3.bold())
+                                        Text("Experiencia").font(.caption).foregroundColor(.gray)
+                                    }
+                                }
+                                .padding(.top, 60)
+                                .padding(.horizontal, 40)
+ 
+                                VStack(spacing: 15) {
+                                    Text("About")
+                                        .font(.headline)
+                                        .foregroundColor(.blue)
+                                    
+                                    HStack(spacing: 0) {
+                                        StatsColumn(title: "Weight", icon: "scalemass", value: "6.9 kg")
+                                        StatsColumn(title: "Height", icon: "ruler", value: "0.7 m")
+                                        StatsColumn(title: "Moves", icon: "bolt.fill", value: "Moves 1")
+                                    }
+                                    
+                                    Text("Este Pokémon tiene una habilidad principal llamada **\(currentDetails?.abilities.first?.ability.name.capitalized ?? "Desconocida")**. Actualmente registrado bajo el ID oficial #\(rawID).")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                        .multilineTextAlignment(.center)
+                                        .lineSpacing(4)
+                                        .padding(.top, 10)
+                                }
+                                .padding(.horizontal, 30)
+                                
+                                VStack(alignment: .center, spacing: 15) {
+                                    Text("Base Stats")
+                                        .font(.headline)
+                                        .padding(.horizontal, 30)
+                                        .foregroundColor(.blue)
+                                    
+                                    VStack(spacing: 12) {
+                                        StatRow(label: "HP", value: 45, max: 255, color: .blue)
+                                        StatRow(label: "ATK", value: 49, max: 255, color: .blue)
+                                        StatRow(label: "DEF", value: 49, max: 255, color: .blue)
+                                        StatRow(label: "SATK", value: 65, max: 255, color: .blue)
+                                        StatRow(label: "SDEF", value: 65, max: 255, color: .blue)
+                                        StatRow(label: "SPD", value: 45, max: 255, color: .blue)
+                                    }
+                                    .padding(.horizontal, 30)
+                                }
+                                .padding(.top, 20)
+
+                                Color.clear.frame(height: 50)
                             }
                         }
                     }
-                    
-                    Spacer()
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.white)
                 .cornerRadius(35, corners: [.topLeft, .topRight])
             }
             .ignoresSafeArea(edges: .bottom)
-            
-           
+
             VStack {
                 AsyncImage(url: AppConfig.pokemonImageUrl(for: rawID)) { phase in
                     switch phase {
@@ -106,37 +112,43 @@ struct PokemonDetailsView: View {
                             .frame(width: 200, height: 200)
                             .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 10)
                     case .failure, .empty:
-                        ProgressView()
-                            .tint(.white)
-                            .frame(width: 200, height: 200)
+                        ProgressView().tint(.white).frame(width: 200, height: 200)
                     @unknown default:
                         EmptyView()
                     }
                 }
-                .padding(.top, 40)
+                .padding(.top, 20)
                 Spacer()
             }
         }
+        .padding(.top, 10)
         .navigationTitle(pokemon.name.capitalized)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
-       
         .task {
             await viewModel.fetchPokemons()
         }
     }
 }
 
-// MARK: - Subvistas Auxiliares
+// MARK: - Subvistas Auxiliares CORREGIDAS
 struct StatsColumn: View {
     let title: String
+    let icon: String?
     let value: String
     
     var body: some View {
         VStack(spacing: 5) {
-            Text(value)
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.primary)
+            HStack(spacing: 4) {
+                if let iconName = icon {
+                    Image(systemName: iconName)
+                        .font(.system(size: 12))
+                        .foregroundColor(.gray)
+                }
+                Text(value)
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(.primary)
+            }
             Text(title)
                 .font(.system(size: 11))
                 .foregroundColor(.gray)
@@ -145,7 +157,39 @@ struct StatsColumn: View {
     }
 }
 
-// MARK: - Helpers de Diseño
+struct StatRow: View {
+    let label: String
+    let value: Int
+    let max: Int
+    let color: Color
+    
+    var body: some View {
+        HStack(spacing: 15) {
+            Text(label)
+                .font(.system(size: 12, weight: .bold))
+                .foregroundColor(.gray)
+                .frame(width: 40, alignment: .leading)
+            
+            Text("\(value)")
+                .font(.system(size: 12, weight: .medium))
+                .frame(width: 30, alignment: .trailing)
+            
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(color.opacity(0.2))
+                        .frame(height: 8)
+
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(color)
+                        .frame(width: geometry.size.width * CGFloat(value) / CGFloat(max), height: 8)
+                }
+            }
+            .frame(height: 8)
+        }
+    }
+}
+
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
@@ -162,23 +206,13 @@ struct RoundedCorner: Shape {
 }
 
 // MARK: - Preview
-//#Preview {
-//    let mockDetails = PokemonDetails(
-//        id: 25,
-//        baseExperience: 112,
-//        height: 4,
-//        isDefault: true,
-//        locationAreaEncounters: "",
-//        abilities: [
-//            AbilitySlot(isHidden: false, slot: 1, ability: NamedResource(name: "static", url: ""))
-//        ],
-//        cries: Cries(latest: "", legacy: ""),
-//        forms: [NamedResource(name: "pikachu", url: "")],
-//        gameIndices: [],
-//        moves: []
-//    )
-//    
-//    return NavigationStack {
-//        PokemonDetailsView(pokemon: mockDetails)
-//    }
-//}
+#Preview {
+  
+    let mockPokemon = PokemonResult(
+        name: "pikachu",
+        url: "https://pokeapi.co/api/v2/pokemon/25/"
+    )
+    return NavigationStack {
+        PokemonDetailsView(pokemon: mockPokemon)
+    }
+}
