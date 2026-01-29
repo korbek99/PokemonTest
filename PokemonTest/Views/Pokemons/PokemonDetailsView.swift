@@ -22,8 +22,7 @@ struct PokemonDetailsView: View {
 
     var body: some View {
         ZStack {
-            Color.red.opacity(0.9).ignoresSafeArea()
-            
+            mainColor.opacity(0.9).ignoresSafeArea()
             VStack(spacing: 0) {
                 Spacer(minLength: 220)
                 
@@ -98,10 +97,12 @@ struct PokemonDetailsView: View {
                                         .foregroundColor(.blue)
                                     
                                     VStack(spacing: 12) {
-                                        StatRow(label: "HP", value: 45, max: 255, color: .blue)
-                                        StatRow(label: "ATK", value: 49, max: 255, color: .blue)
-                                        StatRow(label: "DEF", value: 49, max: 255, color: .blue)
-                                        StatRow(label: "SPD", value: 45, max: 255, color: .blue)
+                                        StatRow(label: "HP", value: getStatValue(name: "hp"), max: 255, color: .blue)
+                                        StatRow(label: "ATK", value: getStatValue(name: "attack"), max: 255, color: .blue)
+                                        StatRow(label: "DEF", value: getStatValue(name: "defense"), max: 255, color: .blue)
+                                        StatRow(label: "SPD", value: getStatValue(name: "speed"), max: 255, color: .blue)
+                                        StatRow(label: "SATK", value: getStatValue(name: "special-attack"), max: 255, color: .blue)
+                                        StatRow(label: "SDEF", value: getStatValue(name: "special-defense"), max: 255, color: .blue)
                                     }
                                     .padding(.horizontal, 30)
                                 }
@@ -137,6 +138,15 @@ struct PokemonDetailsView: View {
         .task {
             await viewModel.fetchPokemons(pokemonId: rawID)
         }
+    }
+    private func getStatValue(name: String) -> Int {
+        currentDetails?.stats.first(where: { $0.stat.name == name })?.baseStat ?? 0
+    }
+    private var mainColor: Color {
+        if let typeName = currentDetails?.types.first?.type.name {
+            return Color.pokemonTypeColor(type: typeName)
+        }
+        return .red
     }
 }
 

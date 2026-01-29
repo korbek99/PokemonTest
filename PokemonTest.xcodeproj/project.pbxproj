@@ -36,6 +36,7 @@
 		D947FCEE2F2A617B00F527DC /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCED2F2A617B00F527DC /* BaseService.swift */; };
 		D947FCF02F2A66EF00F527DC /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCEF2F2A66EF00F527DC /* AppConfig.swift */; };
 		D947FCF32F2A6E5D00F527DC /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF22F2A6E5D00F527DC /* SideMenuView.swift */; };
+		D947FCF62F2BC81000F527DC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D947FCF52F2BC81000F527DC /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		D947FCED2F2A617B00F527DC /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		D947FCEF2F2A66EF00F527DC /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		D947FCF22F2A6E5D00F527DC /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		D947FCF52F2BC81000F527DC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 		D947FC902F27B51800F527DC /* PokemonTest */ = {
 			isa = PBXGroup;
 			children = (
+				D947FCF42F2BC7FE00F527DC /* Utils */,
 				D947FCD92F27C32100F527DC /* Services */,
 				D947FCC42F27B59500F527DC /* EndPoints */,
 				D947FCC32F27B58D00F527DC /* Launcher */,
@@ -289,6 +292,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		D947FCF42F2BC7FE00F527DC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D947FCF52F2BC81000F527DC /* Color.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -425,6 +436,7 @@
 				D947FCD02F27BCFB00F527DC /* FavoritesView.swift in Sources */,
 				D947FCD62F27C27200F527DC /* APIEndpointModel.swift in Sources */,
 				D947FCC62F27B5B400F527DC /* Pokemon.swift in Sources */,
+				D947FCF62F2BC81000F527DC /* Color.swift in Sources */,
 				D947FCE22F27C67800F527DC /* LoginView.swift in Sources */,
 				D947FCE82F29315400F527DC /* PokemonDetailViewModel.swift in Sources */,
 				D947FC9B2F27B51B00F527DC /* Persistence.swift in Sources */,
